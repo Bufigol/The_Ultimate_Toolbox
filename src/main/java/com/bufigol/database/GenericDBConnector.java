@@ -8,9 +8,6 @@ public class GenericDBConnector {
 
     private static GenericDBConnector instance;
     private Connection connection;
-
-    // Database configuration parameters (make these configurable)
-    private String driverClass;
     private String connectionUrl;
     private String username;
     private String password;
@@ -19,62 +16,83 @@ public class GenericDBConnector {
      * Private constructor to enforce Singleton pattern.
      * Initializes the connection using the provided configuration parameters.
      *
-     * @param driverClass   The JDBC driver class name
-     * @param connectionUrl The database connection URL
-     * @param username      The database username
-     * @param password      The database password
+     * @param curl The database connection URL
+     * @param usr      The database username
+     * @param pwd      The database password
      */
-    private GenericDBConnector(String driverClass, String connectionUrl, String username, String password) {
-        this.driverClass = driverClass;
-        this.connectionUrl = connectionUrl;
-        this.username = username;
-        this.password = password;
+    private GenericDBConnector(String curl, String usr, String pwd) {
+        String DRIVER_JDBC = "com.mysql.cj.jdbc.Driver";
+        boolean conection =false;
+        if (!(curl.isBlank() || curl.isEmpty())){
+            this.connectionUrl = curl;
+            if (!(usr.isBlank() || usr.isEmpty())){
+                this.username = usr;
+                if (!(pwd.isBlank() || pwd.isEmpty())){
+                    this.password = pwd;
+                    conection=true;
+                }
+            }
+        }
+        if (conection){
+            try {
+                // Database configuration parameters (make these configurable)
 
-        try {
-            Class.forName(driverClass);
-            connection = DriverManager.getConnection(connectionUrl, username, password);
-            System.out.println("Database connection established."); // Replace with your logging mechanism
-        } catch (ClassNotFoundException | SQLException e) {
-            System.err.println("Error establishing database connection: " + e.getMessage()); // Replace with your logging mechanism
+                Class.forName(DRIVER_JDBC);
+                connection = DriverManager.getConnection(connectionUrl, username, password);
+                System.out.println("Database connection established."); // Replace with your logging mechanism
+            } catch (ClassNotFoundException | SQLException e) {
+                System.err.println("Error establishing database connection: " + e.getMessage()); // Replace with your logging mechanism
+            }
         }
     }
-
-    /**
-     * Gets the singleton instance of the GenericDBConnector.
-     *
-     * @param driverClass   The JDBC driver class name
-     * @param connectionUrl The database connection URL
-     * @param username      The database username
-     * @param password      The database password
-     * @return The singleton instance of GenericDBConnector
-     */
-    public static GenericDBConnector getInstance(String driverClass, String connectionUrl, String username, String password) {
-        if (instance == null) {
-            instance = new GenericDBConnector(driverClass, connectionUrl, username, password);
-        }
-        return instance;
+    public GenericDBConnector() {
+        this("jdbc:mysql://localhost:3306/test", "root", "root");
     }
-
-    /**
-     * Gets the established database connection.
-     *
-     * @return The database connection
-     */
-    public Connection getConnection() {
-        return connection;
-    }
-
-    /**
-     * Closes the database connection.
-     */
-    public void closeConnection() {
+    public void cerrarConexion() {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
-                System.out.println("Database connection closed."); // Replace with your logging mechanism
             }
         } catch (SQLException e) {
             System.err.println("Error closing database connection: " + e.getMessage()); // Replace with your logging mechanism
         }
+    }
+    public static GenericDBConnector getInstance() {
+        if (instance == null) {
+            instance = new GenericDBConnector();
+        }
+        return instance;
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
+    public String getConnectionUrl() {
+        return connectionUrl;
+    }
+
+    public void setConnectionUrl(String connectionUrl) {
+        this.connectionUrl = connectionUrl;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -3,10 +3,14 @@ package com.bufigol.fileManagment;
 import com.bufigol.fileManagment.UniversalCSVReaderAndWriter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class JSON_Handler {
     /**
@@ -65,4 +69,67 @@ public class JSON_Handler {
             throw new RuntimeException("Error writing JSON file", e);
         }
     }
+    /**
+     * Reads a name/value pair from a JSON file.
+     *
+     * @param jsonFilePath The path to the JSON file
+     * @param name         The name of the key to retrieve the value for
+     * @return The value associated with the specified name, or null if not found
+     * @throws RuntimeException if an error occurs during parsing or reading
+     */
+    public static String readValueFromJson(String jsonFilePath, String name) {
+        JSONParser parser = new JSONParser();
+        try (FileReader reader = new FileReader(jsonFilePath)) {
+            JSONObject jsonObject = (JSONObject) parser.parse(reader);
+            return (String) jsonObject.get(name); // Cast to String assuming values are strings
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException("Error reading value from JSON file", e);
+        }
+    }
+    /**
+     * Reads a JSON file and returns a list of JSON objects.
+     *
+     * @param jsonFilePath The path to the JSON file
+     * @return A list of JSONObject representing the objects in the JSON file
+     * @throws RuntimeException if an error occurs during parsing or reading
+     */
+    public static List<JSONObject> readJsonObjects(String jsonFilePath) {
+        JSONParser parser = new JSONParser();
+        try (FileReader reader = new FileReader(jsonFilePath)) {
+            Object parsedData = parser.parse(reader);
+            if (parsedData instanceof JSONArray) {
+                JSONArray jsonArray = (JSONArray) parsedData;
+                List<JSONObject> jsonObjects = new ArrayList<>();
+                for (Object obj : jsonArray) {
+                    if (obj instanceof JSONObject) {
+                        jsonObjects.add((JSONObject) obj);
+                    } else {
+                        throw new RuntimeException("Unexpected data type in JSONArray: " + obj.getClass().getName());
+                    }
+                }
+                return jsonObjects;
+            } else {
+                throw new RuntimeException("JSON file does not contain a JSONArray");
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException("Error reading JSON file", e);
+        }
+    }
+
+    /**
+     * Retrieves a list of values for a specified key from a list of JSON objects.
+     *
+     * @param jsonObjects The list of JSONObject to extract values from
+     * @param key         The name of the key for which to retrieve values
+     * @return A list of values associated with the specified key
+     */
+    public static List<String> getValuesForKey(List<JSONObject> jsonObjects, String key) {
+        List<String> values = new ArrayList<>();
+        for (JSONObject jsonObject : jsonObjects) {
+            String value = (String) jsonObject.get(key);
+            values.add(value);
+        }
+        return values;
+    }
 }
+

@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="The_Ultimate_Toolbox:jar">
+    <output-path>$PROJECT_DIR$/../../</output-path>
+    <root id="archive" name="The_Ultimate_Toolbox.jar">
+      <element id="module-output" name="The_Ultimate_Toolbox" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/json-simple/json-simple-1.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/json-simple/json-simple-1.1.1-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/json-simple/json-simple-1.1.1-sources.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

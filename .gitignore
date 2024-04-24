@@ -38,4 +38,4 @@ build/
 .DS_Store
 
 ### Files ###
-test.java
+src/main/java/com/bufigol/test.java

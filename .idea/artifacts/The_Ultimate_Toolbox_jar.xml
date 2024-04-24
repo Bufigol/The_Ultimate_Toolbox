@@ -1,11 +1,16 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="The_Ultimate_Toolbox:jar">
+  <artifact type="jar" build-on-make="true" name="The_Ultimate_Toolbox:jar">
     <output-path>$PROJECT_DIR$/../../</output-path>
     <root id="archive" name="The_Ultimate_Toolbox.jar">
       <element id="module-output" name="The_Ultimate_Toolbox" />
       <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/json-simple/json-simple-1.1.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/json-simple/json-simple-1.1.1-javadoc.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/json-simple/json-simple-1.1.1-sources.jar" path-in-jar="/" />
+      <element id="library" level="project" name="gson-2.9.0" />
+      <element id="library" level="project" name="json-20231013" />
+      <element id="library" level="project" name="json-simple-1.1.1-javadoc" />
+      <element id="library" level="project" name="mysql-connector-java-8.0.26" />
+      <element id="library" level="project" name="protobuf-java-3.11.4" />
     </root>
   </artifact>
 </component>

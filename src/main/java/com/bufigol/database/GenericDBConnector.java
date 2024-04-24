@@ -20,7 +20,7 @@ public class GenericDBConnector {
      * @param usr      The database username
      * @param pwd      The database password
      */
-    private GenericDBConnector(String curl, String usr, String pwd) {
+    public GenericDBConnector(String curl, String usr, String pwd) {
         String DRIVER_JDBC = "com.mysql.cj.jdbc.Driver";
         boolean conection =false;
         if (!(curl.isBlank() || curl.isEmpty())){
@@ -36,7 +36,6 @@ public class GenericDBConnector {
         if (conection){
             try {
                 // Database configuration parameters (make these configurable)
-
                 Class.forName(DRIVER_JDBC);
                 connection = DriverManager.getConnection(connectionUrl, username, password);
                 System.out.println("Database connection established."); // Replace with your logging mechanism

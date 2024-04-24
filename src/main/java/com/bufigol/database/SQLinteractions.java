@@ -1,9 +1,6 @@
 package com.bufigol.database;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class SQLinteractions {
 
@@ -119,6 +116,42 @@ public class SQLinteractions {
 
         return out;
     }
+    /**
+     * Creates a new table in the database with the specified name and columns.
+     *
+     * @param connection the database connection
+     * @param nombreTabla the name of the table to create
+     * @param columnas an array of column names for the new table
+     * @param tipos an array of column types for the new table, corresponding to the columnas array
+     * @return true if the table was created successfully, false otherwise
+     * @throws SQLException if a database access error occurs
+     * @throws IllegalArgumentException if the number of columnas and tipos arrays are not equal
+     */
+    public static boolean crearTabla(Connection connection, String nombreTabla, String[] columnas, String[] tipos) throws SQLException {
+        if (columnas.length != tipos.length) {
+            throw new IllegalArgumentException("El número de columnas y tipos debe ser el mismo.");
+        }
 
+        StringBuilder queryBuilder = new StringBuilder("CREATE TABLE IF NOT EXISTS ");
+        queryBuilder.append(nombreTabla).append(" (");
+
+        // Añadir columna ID_[nombreTabla] como PRIMARY KEY
+        queryBuilder.append("ID_").append(nombreTabla).append(" INT AUTO_INCREMENT PRIMARY KEY");
+
+        // Agregar las columnas proporcionadas
+        for (int i = 0; i < columnas.length; i++) {
+            queryBuilder.append(", ").append(columnas[i]).append(" ").append(tipos[i]);
+        }
+
+        queryBuilder.append(")");
+
+        String query = queryBuilder.toString();
+
+        try (Statement stmt = connection.createStatement()) {
+            // Ejecutar la consulta para crear la tabla
+            stmt.executeUpdate(query);
+            return true; // Devolver true si la tabla se creó con éxito
+        }
+    }
     }
 

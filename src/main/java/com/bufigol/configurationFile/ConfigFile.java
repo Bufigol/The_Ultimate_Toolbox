@@ -53,7 +53,6 @@ public class ConfigFile {
     public void escribirConfiguracion() throws ConfigException {
         try (FileOutputStream output = new FileOutputStream(configFilePath)) {
             properties.store(output, null);
-            ErrorLogger.logInfo("Configuración guardada.");
         } catch (IOException e) {
             throw new ConfigException("Error al escribir el archivo de configuración.", e);
         }
@@ -107,7 +106,6 @@ public class ConfigFile {
     private void leerConfiguracion() throws ConfigException {
         try (FileInputStream input = new FileInputStream(configFilePath)) {
             properties.load(input);
-            ErrorLogger.logInfo("Configuración cargada.");
         } catch (FileNotFoundException e) {
             throw new ConfigException("Archivo de configuración no encontrado: " + configFilePath, e);
         } catch (IOException e) {

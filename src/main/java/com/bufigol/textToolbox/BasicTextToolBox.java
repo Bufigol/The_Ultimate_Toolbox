@@ -48,4 +48,14 @@ public class BasicTextToolBox {
             return out;
         }
     }
+
+    public static String removeCharacterFromString(String s, char c) {
+        StringBuilder out= new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != c) {
+                out.append(s.charAt(i));
+            }
+        }
+        return out.toString();
+    }
 }

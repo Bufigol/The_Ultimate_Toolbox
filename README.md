@@ -26,4 +26,6 @@ We encourage all developers to participate and expand the toolbox with their uni
 
 ## Let's Build Something Amazing! 🚀
 Collaboration is key to creating a valuable resource for the Java community. By working together, we can build The Ultimate Toolbox and make development more efficient and enjoyable!
+
 **Join us today and contribute your expertise!**
+

@@ -3,6 +3,7 @@ package com.bufigol.database;
 import com.bufigol.textToolbox.BasicTextToolBox;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class SQLinteractions {
 
@@ -183,7 +184,7 @@ public class SQLinteractions {
         return out;
     }
     public static boolean updateById(Connection connection, String table,String idColumnName, int id, String[] columns, String[] values, String[] types) throws SQLException {
-        boolean out=false;
+        boolean out = false;
         String sql = "UPDATE " + table + " SET ";
         for (int i = 0; i < columns.length; i++) {
             sql += columns[i] + " = " + values[i];
@@ -194,8 +195,44 @@ public class SQLinteractions {
         sql += " WHERE " + idColumnName + " = " + id;
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             out = statement.executeUpdate() > 0;
+            return out;
+        }
+    }
+
+    public static ArrayList<String[]> searchByField(Connection connection, String table, String field, String value) throws SQLException {
+        String sql = "SELECT * FROM " + table + " WHERE " + field + " = ?";
+        ArrayList<String[]> out = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, value);
+            int totalColumns = statement.getMetaData().getColumnCount();
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    String[] row = new String[totalColumns];
+                    for (int i = 0; i < totalColumns; i++) {
+                        row[i] = resultSet.getString(i + 1);
+                    }
+                    out.add(row);
+                }
+            }
+        }
         return out;
     }
+
+    public static ArrayList<String[]> searchByMultimpleField(Connection connection, String table, String[] field, String[] values) throws SQLException {
+        ArrayList<String[]> out = new ArrayList<>();
+        String sql = "SELECT * FROM " + table + " WHERE ";
+        if (field.length != values.length) {
+            throw new IllegalArgumentException("The number of fields and values must be the same.");
+        }
+        for (int i = 0; i < field.length; i++) {
+            sql += field[i] + " = " + values[i];
+            if (i < field.length - 1) {
+                sql += " AND ";
+            }}
+        return out;
+    }
+
+
     /**
      * Creates a new table in the database with the specified name and columns.
      *

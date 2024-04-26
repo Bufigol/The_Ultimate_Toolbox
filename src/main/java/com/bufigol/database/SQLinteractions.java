@@ -182,6 +182,20 @@ public class SQLinteractions {
 
         return out;
     }
+    public static boolean updateById(Connection connection, String table,String idColumnName, int id, String[] columns, String[] values, String[] types) throws SQLException {
+        boolean out=false;
+        String sql = "UPDATE " + table + " SET ";
+        for (int i = 0; i < columns.length; i++) {
+            sql += columns[i] + " = " + values[i];
+            if (i < columns.length - 1) {
+                sql += ", ";
+            }
+        }
+        sql += " WHERE " + idColumnName + " = " + id;
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            out = statement.executeUpdate() > 0;
+        return out;
+    }
     /**
      * Creates a new table in the database with the specified name and columns.
      *

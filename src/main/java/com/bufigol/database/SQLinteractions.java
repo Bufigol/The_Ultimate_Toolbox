@@ -204,21 +204,23 @@ public class SQLinteractions {
         ArrayList<String[]> out = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, value);
-            int totalColumns = statement.getMetaData().getColumnCount();
+
             try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
+                int totalColumns = resultSet.getMetaData().getColumnCount();
+                while (!resultSet.isLast()) {
                     String[] row = new String[totalColumns];
                     for (int i = 0; i < totalColumns; i++) {
                         row[i] = resultSet.getString(i + 1);
                     }
                     out.add(row);
+                    resultSet.next();
                 }
             }
         }
         return out;
     }
 
-    public static ArrayList<String[]> searchByMultimpleField(Connection connection, String table, String[] field, String[] values) throws SQLException {
+    public static ArrayList<String[]> searchByMultipleField(Connection connection, String table, String[] field, String[] values) throws SQLException {
         ArrayList<String[]> out = new ArrayList<>();
         String sql = "SELECT * FROM " + table + " WHERE ";
         if (field.length != values.length) {

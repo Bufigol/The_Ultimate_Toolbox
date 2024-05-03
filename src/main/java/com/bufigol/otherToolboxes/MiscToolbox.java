@@ -9,4 +9,5 @@ public class MiscToolbox {
         rand.setSeed(System.currentTimeMillis());
         return rand.nextInt((max - min) + 1) + min;
     }
+
 }

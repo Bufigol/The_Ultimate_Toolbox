@@ -202,23 +202,26 @@ public class SQLinteractions {
     public static ArrayList<String[]> searchByField(Connection connection, String table, String field, String value) throws SQLException {
         String sql = "SELECT * FROM " + table + " WHERE " + field + " = ?";
         ArrayList<String[]> out = new ArrayList<>();
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, value);
-            int totalColumns = statement.getMetaData().getColumnCount();
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    String[] row = new String[totalColumns];
-                    for (int i = 0; i < totalColumns; i++) {
-                        row[i] = resultSet.getString(i + 1);
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, value);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    int columnCount = rs.getMetaData().getColumnCount();
+                    String[] row = new String[columnCount];
+                    for (int i = 0; i < columnCount; i++) {
+                        row[i] = rs.getString(i + 1);
                     }
                     out.add(row);
                 }
             }
         }
+
         return out;
     }
 
-    public static ArrayList<String[]> searchByMultimpleField(Connection connection, String table, String[] field, String[] values) throws SQLException {
+    public static ArrayList<String[]> searchByMultipleField(Connection connection, String table, String[] field, String[] values) throws SQLException {
         ArrayList<String[]> out = new ArrayList<>();
         String sql = "SELECT * FROM " + table + " WHERE ";
         if (field.length != values.length) {

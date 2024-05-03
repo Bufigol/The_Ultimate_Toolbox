@@ -1,5 +1,3 @@
-package com.bufigol;
-
 import com.bufigol.database.GenericDBConnector;
 
 public class test {

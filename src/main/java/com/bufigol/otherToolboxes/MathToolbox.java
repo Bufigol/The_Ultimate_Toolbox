@@ -108,4 +108,29 @@ public class MathToolbox {
 
         return Integer.valueOf(stTen);
     }
+
+    public static double power(double base, int exponent) {
+        if (exponent == 0) {
+            return 1;
+        } else if (exponent > 0) {
+            return base * power(base, exponent - 1);
+        } else {
+            return 1 / power(base, -exponent);
+        }
+    }
+
+    public static int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        } else {
+            return gcd(b, a % b);
+        }
+    }
+    public static int factorial(int n) {
+        if (n == 0) {
+            return 1;
+        } else {
+            return n * factorial(n - 1);
+        }
+    }
 }

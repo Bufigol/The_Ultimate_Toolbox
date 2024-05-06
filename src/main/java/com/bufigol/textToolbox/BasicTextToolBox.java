@@ -58,4 +58,9 @@ public class BasicTextToolBox {
         }
         return out.toString();
     }
+
+    public static boolean isPalindrome(String str) {
+        String reversed = new StringBuilder(str).reverse().toString();
+        return str.equals(reversed);
+    }
 }

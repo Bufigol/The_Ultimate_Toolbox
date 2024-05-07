@@ -273,5 +273,42 @@ public class SQLinteractions {
             return true; // Devolver true si la tabla se creó con éxito
         }
     }
+    public static ArrayList<String[]> searchIgnoreCase(Connection connection, String tableName, String columnName, String searchValue) {
+        try {
+            ArrayList<String[]> out = new ArrayList<>();
+            // Crear la consulta SQL para buscar el valor ignorando mayúsculas/minúsculas
+            String sql = "SELECT * FROM " + tableName + " WHERE LOWER(" + columnName + ") = LOWER(?)";
+
+            // Crear una declaración preparada
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            // Establecer el valor a buscar en la declaración preparada
+            statement.setString(1, searchValue);
+
+            // Ejecutar la consulta
+            ResultSet resultSet = statement.executeQuery();
+
+            // Mostrar resultados
+            int columnCount = resultSet.getMetaData().getColumnCount();
+            while (resultSet.next()) {
+                // Aquí puedes procesar los resultados como desees
+                // Por ejemplo, puedes imprimirlos en la consola
+                String[] row = new String[columnCount];
+                for(int i = 0; i < columnCount; i++) {
+                    row[i] = resultSet.getString(i + 1);
+                }
+                out.add(row);
+                System.out.println("Resultado encontrado: " + resultSet.getString(columnName));
+            }
+
+            // Cerrar recursos
+            resultSet.close();
+            statement.close();
+            return out;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     }
 

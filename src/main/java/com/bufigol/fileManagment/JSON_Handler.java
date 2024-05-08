@@ -97,8 +97,7 @@ public class JSON_Handler {
         JSONParser parser = new JSONParser();
         try (FileReader reader = new FileReader(jsonFilePath)) {
             Object parsedData = parser.parse(reader);
-            if (parsedData instanceof JSONArray) {
-                JSONArray jsonArray = (JSONArray) parsedData;
+            if (parsedData instanceof JSONArray jsonArray) {
                 List<JSONObject> jsonObjects = new ArrayList<>();
                 for (Object obj : jsonArray) {
                     if (obj instanceof JSONObject) {

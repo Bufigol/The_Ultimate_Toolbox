@@ -95,7 +95,6 @@ public class SQLinteractions {
                         pstmt.setString(i + 1, values[i]);
                         break;
                 }
-                pstmt.setString(i + 1, values[i]);
             }
 
             // Ejecuta la consulta
@@ -207,7 +206,7 @@ public class SQLinteractions {
         }
     }
 
-    public static ArrayList<String[]> searchByField(Connection connection, String table, String field, String value) throws SQLException {
+    public static ArrayList<String[]> searchByField(Connection connection, String table, String field, String value) {
         String sql = "SELECT * FROM " + table + " WHERE " + field + " = ?";
         ArrayList<String[]> out = new ArrayList<>();
 
@@ -224,22 +223,81 @@ public class SQLinteractions {
                     out.add(row);
                 }
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         return out;
     }
 
-    public static ArrayList<String[]> searchByMultipleFieldAND(Connection connection, String table, String[] field, String[] values) throws SQLException {
+    public static ArrayList<String[]> searchByMultipleFieldAND(Connection connection, String table, String[] field, String[] values,String[] types) {
         ArrayList<String[]> out = new ArrayList<>();
         String sql = "SELECT * FROM " + table + " WHERE ";
         if (field.length != values.length) {
             throw new IllegalArgumentException("The number of fields and values must be the same.");
         }
         for (int i = 0; i < field.length; i++) {
-            sql += field[i] + " = " + values[i];
+            sql += field[i] + " = ?" ;
             if (i < field.length - 1) {
                 sql += " AND ";
             }
+        }
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            for (int i = 0; i < values.length; i++) {
+                String type = types[i];
+                switch (type) {
+                    case "INT":
+                        pstmt.setInt(i + 1, Integer.parseInt(values[i]));
+                        break;
+                    case "FLOAT":
+                        pstmt.setFloat(i + 1, Float.parseFloat(values[i]));
+                        break;
+                    case "DOUBLE":
+                        pstmt.setDouble(i + 1, Double.parseDouble(values[i]));
+                        break;
+                    default:
+                        pstmt.setString(i + 1, values[i]);
+                        break;
+                }
+            }
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    int columnCount = rs.getMetaData().getColumnCount();
+                    String[] row = new String[columnCount];
+                    for (int i = 0; i < columnCount; i++) {
+                        switch (rs.getMetaData().getColumnType(i + 1)) {
+                            case Types.FLOAT:
+                                row[i] = String.valueOf(rs.getFloat(i + 1));
+                                break;
+                            case Types.DOUBLE:
+                                row[i] = String.valueOf(rs.getDouble(i + 1));
+                                break;
+                            case Types.INTEGER:
+                                row[i] = String.valueOf(rs.getInt(i + 1));
+                                break;
+                            case Types.BIGINT:
+                                row[i] = String.valueOf(rs.getLong(i + 1));
+                                break;
+                            case Types.DATE:
+                                row[i] = String.valueOf(rs.getDate(i + 1));
+                                break;
+                            case Types.TIMESTAMP:
+                                row[i] = String.valueOf(rs.getTimestamp(i + 1));
+                                break;
+                            case Types.BOOLEAN:
+                                row[i] = String.valueOf(rs.getBoolean(i + 1));
+                                break;
+                            default:
+                                row[i] = rs.getString(i + 1);
+                                break;
+                        }
+                        row[i] = rs.getString(i + 1);
+                    }
+                    out.add(row);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return out;
     }

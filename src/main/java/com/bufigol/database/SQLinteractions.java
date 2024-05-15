@@ -291,15 +291,16 @@ public class SQLinteractions {
                                 row[i] = rs.getString(i + 1);
                                 break;
                         }
-                        row[i] = rs.getString(i + 1);
+                        out.add(row);
                     }
-                    out.add(row);
+
                 }
+                return out;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return out;
+
     }
 
     public static ArrayList<String[]> searchByMultipleFieldOR(Connection connection, String table, String[] field, String[] values) throws SQLException {

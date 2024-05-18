@@ -1,7 +1,6 @@
 package com.bufigol.fileManagment;
 
 import com.bufigol.fileManagment.UniversalCSVReaderAndWriter;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -12,9 +11,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class, JSON_Handler, provides methods for handling JSON files, such as converting CSV data to JSON,
+ * reading values from JSON files, and extracting values for a specified key from a list of JSON objects.
+ */
 public class JSON_Handler {
+
     /**
-     * Reads data from a CSV file, converts it into a JSON structure, and writes it to a JSON file.
+     * Converts CSV data to JSON format and writes it to a JSON file.
      *
      * @param csvFilePath The path to the input CSV file
      * @param jsonFilePath The path to the output JSON file
@@ -69,6 +73,7 @@ public class JSON_Handler {
             throw new RuntimeException("Error writing JSON file", e);
         }
     }
+
     /**
      * Reads a name/value pair from a JSON file.
      *
@@ -86,6 +91,7 @@ public class JSON_Handler {
             throw new RuntimeException("Error reading value from JSON file", e);
         }
     }
+
     /**
      * Reads a JSON file and returns a list of JSON objects.
      *
@@ -131,4 +137,3 @@ public class JSON_Handler {
         return values;
     }
 }
-

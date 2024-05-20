@@ -9,107 +9,110 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * This class is responsible for handling the configuration file of the application.
+ * It provides methods to read, write, and modify the properties in the configuration file.
+ */
 public class ConfigFile {
 
     /**
-     * Propiedades del archivo de configuración.
+     * The Properties object that holds the configuration properties.
      */
     private final Properties properties;
 
     /**
-     * Ruta del archivo de configuración.
+     * The file path of the configuration file.
      */
     private final String configFilePath;
 
     /**
-     * Constructor por defecto. Utiliza la ruta del archivo de configuración predeterminada.
+     * Default constructor that uses the default configuration file path.
      */
     public ConfigFile() {
-        this.properties = new Properties();
-        this.configFilePath = "config.properties";
+        this.properties = new Properties(); // Initialize the Properties object
+        this.configFilePath = "config.properties"; // Set the default file path
     }
 
     /**
-     * Constructor con ruta de archivo personalizada.
+     * Constructor with a custom configuration file path.
      *
-     * @param configFilePath Ruta del archivo de configuración.
+     * @param configFilePath The file path of the configuration file.
      */
     public ConfigFile(String configFilePath) {
-        this.properties = new Properties();
-        this.configFilePath = configFilePath;
+        this.properties = new Properties(); // Initialize the Properties object
+        this.configFilePath = configFilePath; // Set the custom file path
         try {
-            leerConfiguracion();
+            readConfiguration(); // Read the configuration file
         } catch (ConfigException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e); // Throw a runtime exception if there is an error reading the configuration file
         }
     }
 
-
     /**
-     * Escribe las propiedades actuales al archivo de configuración.
+     * Writes the current properties to the configuration file.
      *
-     * @throws ConfigException Si ocurre un error al escribir el archivo.
+     * @throws ConfigException If there is an error writing the file.
      */
-    public void escribirConfiguracion() throws ConfigException {
+    public void writeConfiguration() throws ConfigException {
         try (FileOutputStream output = new FileOutputStream(configFilePath)) {
-            properties.store(output, null);
+            properties.store(output, null); // Store the properties in the file output stream
         } catch (IOException e) {
-            throw new ConfigException("Error al escribir el archivo de configuración.", e);
+            throw new ConfigException("Error writing the configuration file.", e); // Throw a ConfigException if there is an error writing the file
         }
     }
 
     /**
-     * Obtiene el valor de una propiedad específica.
+     * Gets the value of a specific property.
      *
-     * @param clave Clave de la propiedad.
-     * @return Valor de la propiedad.
+     * @param key The key of the property.
+     * @return The value of the property.
      */
-    public String obtenerValor(String clave) {
-        return properties.getProperty(clave);
+    public String getValue(String key) {
+        return properties.getProperty(key); // Get the property value using its key
     }
 
     /**
-     * Establece el valor de una propiedad.
+     * Sets the value of a property.
      *
-     * @param clave Clave de la propiedad.
-     * @param valor Nuevo valor de la propiedad.
+     * @param key   The key of the property.
+     * @param value The new value of the property.
      */
-    public void establecerValor(String clave, String valor) {
-        properties.setProperty(clave, valor);
+    public void setValue(String key, String value) {
+        properties.setProperty(key, value); // Set the property value using its key
     }
 
     /**
-     * Crea una nueva categoría sin valor en el archivo de configuración.
+     * Creates a new category without a value in the configuration file.
      *
-     * @param nombreCategoria Nombre de la nueva categoría.
+     * @param categoryName The name of the new category.
      */
-    public void crearNuevaCategoria(String nombreCategoria) {
-        properties.setProperty(nombreCategoria, "");
+    public void createNewCategory(String categoryName) {
+        properties.setProperty(categoryName, ""); // Create a new category with an empty value
     }
 
     /**
-     * Crea una nueva categoría con un valor específico en el archivo de configuración.
+     * Creates a new category with a specific value in the configuration file.
      *
-     * @param nombreCategoria Nombre de la nueva categoría.
-     * @param valor           Valor de la nueva categoría.
+     * @param categoryName The name of the new category.
+     * @param value       The value of the new category.
      */
-    public void crearNuevaCategoriaValor(String nombreCategoria, String valor) {
-        crearNuevaCategoria(nombreCategoria);
-        establecerValor(nombreCategoria, valor);
+    public void createNewCategoryValue(String categoryName, String value) {
+        createNewCategory(categoryName); // Create a new category
+        setValue(categoryName, value); // Set the value of the new category
     }
 
     /**
-     * Lee las propiedades del archivo de configuración.
+     * Reads the properties from the configuration file.
      *
-     * @throws ConfigException Si el archivo no se encuentra o si ocurre un error al leerlo.
+     * @throws ConfigException If the file is not found or if there is an error reading it.
      */
-    private void leerConfiguracion() throws ConfigException {
+    private void readConfiguration() throws ConfigException {
         try (FileInputStream input = new FileInputStream(configFilePath)) {
-            properties.load(input);
+            properties.load(input); // Load the properties from the file input stream
         } catch (FileNotFoundException e) {
-            throw new ConfigException("Archivo de configuración no encontrado: " + configFilePath, e);
+            throw new ConfigException("Configuration file not found: " + configFilePath, e); // Throw a ConfigException if the file is not found
         } catch (IOException e) {
-            throw new ConfigException("Error al leer el archivo de configuración.", e);
+            throw new ConfigException("Error reading the configuration file.", e); // Throw a ConfigException if there is an error reading the file
         }
     }
 }

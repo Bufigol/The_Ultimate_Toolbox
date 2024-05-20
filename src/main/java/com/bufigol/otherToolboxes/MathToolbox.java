@@ -5,49 +5,92 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class, MathToolbox, provides a collection of utility methods for mathematical operations.
+ */
 public class MathToolbox {
-    public static int nextMultipleOfTen (int number){
-        int result = (int) (Math.round((number + 5)/ 10.0) * 10.0);
+
+    /**
+     * Returns the next multiple of ten that is greater than or equal to the given number.
+     * This method rounds up the number to the nearest multiple of ten.
+     *
+     * @param number The number to find the next multiple of ten for.
+     * @return The next multiple of ten.
+     */
+    public static int nextMultipleOfTen(int number) {
+        int result = (int) (Math.round((number + 5) / 10.0) * 10.0);
         return result;
     }
 
-    public static int nextMultipleOfHundred (int number){
-        int result = (int) (Math.round((number + 50)/ 100.0) * 100.0);
+    /**
+     * Returns the next multiple of hundred that is greater than or equal to the given number.
+     * This method rounds up the number to the nearest multiple of hundred.
+     *
+     * @param number The number to find the next multiple of hundred for.
+     * @return The next multiple of hundred.
+     */
+    public static int nextMultipleOfHundred(int number) {
+        int result = (int) (Math.round((number + 50) / 100.0) * 100.0);
         return result;
     }
 
-    public static int binomialCoefficient (int n, int k){
-        if(k==0||n==k){return 1;}
-        else{return binomialCoefficient(n-1,k-1)+binomialCoefficient(n-1,k);}
+    /**
+     * Calculates the binomial coefficient (n choose k) using the recursive formula.
+     *
+     * @param n The number of items to choose from.
+     * @param k The number of items to choose.
+     * @return The binomial coefficient (n choose k).
+     */
+    public static int binomialCoefficient(int n, int k) {
+        if (k == 0 || n == k) {
+            return 1;
+        } else {
+            return binomialCoefficient(n - 1, k - 1) + binomialCoefficient(n - 1, k);
+        }
     }
 
-    public static double[] binomialDistribution (int n, double p){
-        double[] dist = new double[n+1];
-        for(int x = 0;x<=n;x++){
-            dist[x] = binomialCoefficient(n,x)*Math.pow(p,x)*Math.pow(1-p,n-x);
+    /**
+     * Calculates the probabilities of a binomial distribution with n trials and success probability p.
+     *
+     * @param n The number of trials.
+     * @param p The success probability.
+     * @return An array of probabilities for each number of successes from 0 to n.
+     */
+    public static double[] binomialDistribution(int n, double p) {
+        double[] dist = new double[n + 1];
+        for (int x = 0; x <= n; x++) {
+            dist[x] = binomialCoefficient(n, x) * Math.pow(p, x) * Math.pow(1 - p, n - x);
         }
         return dist;
     }
 
-    public static double[] multiplyArrayByDouble(double[] array,double n){
+    /**
+     * Multiplies each element in the given array by a constant factor.
+     *
+     * @param array The array of numbers to multiply.
+     * @param n     The constant factor.
+     * @return A new array containing the multiplied numbers.
+     */
+    public static double[] multiplyArrayByDouble(double[] array, double n) {
         double[] result = new double[array.length];
-        for(int i=0;i<array.length;i++){
-            result[i]=array[i]*n;
+        for (int i = 0; i < array.length; i++) {
+            result[i] = array[i] * n;
         }
         return result;
     }
 
     /**
-     * Finds the smallest number in the List and return its index
-     * @param list List of Number
-     * @return the index of the number, an int
+     * Finds the index of the smallest number in the given list of numbers.
+     *
+     * @param list The list of numbers.
+     * @return The index of the smallest number.
      */
-    public static int findSmallest(List<? extends Number> list){
+    public static int findSmallest(List<? extends Number> list) {
         int index = 0;
-        for(int i=1;i<list.size();i++){
+        for (int i = 1; i < list.size(); i++) {
             Double atI = list.get(i).doubleValue();
             Double atIndex = list.get(index).doubleValue();
-            if(atI<atIndex){
+            if (atI < atIndex) {
                 index = i;
             }
         }
@@ -55,14 +98,15 @@ public class MathToolbox {
     }
 
     /**
-     * finds the biggest number in the ArrayList and return its index
-     * @param arrayList The target list
-     * @return The index of the number, an int
+     * Finds the index of the largest number in the given ArrayList of integers.
+     *
+     * @param arrayList The ArrayList of integers.
+     * @return The index of the largest number.
      */
-    public static int findBiggest(ArrayList<Integer> arrayList){
+    public static int findBiggest(ArrayList<Integer> arrayList) {
         int index = 0;
-        for(int i=1;i<arrayList.size();i++){
-            if(arrayList.get(i)>arrayList.get(index)){
+        for (int i = 1; i < arrayList.size(); i++) {
+            if (arrayList.get(i) > arrayList.get(index)) {
                 index = i;
             }
         }
@@ -70,67 +114,56 @@ public class MathToolbox {
     }
 
     /**
-     * Gets all Integer in a range
+     * Returns a list of integers that contains every integer between start and end, inclusive.
+     *
      * @param start The lower limit of the range, inclusive.
-     * @param end The upper limit of the range, inclusive.
-     * @return A list of Integer that contains every Integer between start and end.
+     * @param end   The upper limit of the range, inclusive.
+     * @return A list of integers.
      */
-    public static ArrayList<Integer> getAllIntInRange(int start, int end){
+    public static ArrayList<Integer> getAllIntInRange(int start, int end) {
         ArrayList<Integer> ints = new ArrayList<Integer>();
-        for(int i=start;i<=end;i++){
+        for (int i = start; i <= end; i++) {
             ints.add(i);
         }
         return ints;
     }
 
     /**
-     * Round a double to a certain number of decimals.
-     * @param value The number that is going to be round.
+     * Rounds a double to a certain number of decimals.
+     *
+     * @param value   The number that is going to be rounded.
      * @param places The number of decimals it will contain.
      * @return The rounded number.
-     * {@literal @throws IllegalArgumentException If places <0.}
+     * @throws IllegalArgumentException If places is negative.
      */
-    public static double round(double value, int places) { //rounds a double 'value' for it to have 'places' number of decimals
-        if (places < 0) throw new IllegalArgumentException(); //places needs to be >=0
-
+    public static double round(double value, int places) {
+        if (places < 0) {
+            throw new IllegalArgumentException();
+        }
         BigDecimal bd = new BigDecimal(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
 
-    public static int roundToLastPowerOfTen(int n){
+    /**
+     * Returns the last power of ten that is less than or equal to the given number.
+     *
+     * @param n The number to find the last power of ten for.
+     * @return The last power of ten.
+     */
+    public static int roundToLastPowerOfTen(int n) {
         int length = String.valueOf(n).length();
         String stTen = "1";
 
-        for (int i = 0; i < length-1; i++) {
-            stTen+="0";
+        for (int i = 0; i < length - 1; i++) {
+            stTen += "0";
         }
 
         return Integer.valueOf(stTen);
     }
 
-    public static double power(double base, int exponent) {
-        if (exponent == 0) {
-            return 1;
-        } else if (exponent > 0) {
-            return base * power(base, exponent - 1);
-        } else {
-            return 1 / power(base, -exponent);
-        }
-    }
-
-    public static int gcd(int a, int b) {
-        if (b == 0) {
-            return a;
-        } else {
-            return gcd(b, a % b);
-        }
-    }
-    public static int factorial(int n) {
-        if (n == 0) {
-            return 1;
-        } else {
-            return n * factorial(n - 1);
-        }
-    }
-}
+    /**
+     * Calculates the power of a number using recursion.
+     *
+     * @param base   The base number.
+     * @param

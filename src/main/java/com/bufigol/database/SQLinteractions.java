@@ -190,6 +190,8 @@ public class SQLinteractions {
             statement.setInt(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
+            Logger logger = LogManager.getLogger(SQLinteractions.class);
+            logger.error("An error occurred while searching", e);
             throw new RuntimeException(e);
         }
     }
@@ -202,7 +204,7 @@ public class SQLinteractions {
      * @param id         an array of IDs of the rows to be deleted
      * @return true if all rows were deleted successfully, false otherwise
      */
-    public static boolean deleteRowByID(Connection connection, String table, int[] id)  {
+    public static boolean deleteRowsByID(Connection connection, String table, int[] id)  {
         int count = 0;
         boolean out = true;
         while (count < id.length && out) {
@@ -427,7 +429,7 @@ public class SQLinteractions {
         }
     }
 
-    static ArrayList<String[]> searchIgnoreCase(Connection connection, String tableName, String columnName, String searchValue) {
+    public static ArrayList<String[]> searchIgnoreCase(Connection connection, String tableName, String columnName, String searchValue) {
         try {
             ArrayList<String[]> out = new ArrayList<>();
             // Crear la consulta SQL para buscar el valor ignorando mayúsculas/minúsculas
@@ -465,5 +467,51 @@ public class SQLinteractions {
             return null;
         }
     }
+    public static ArrayList<String[]> searchIgnoreCaseMultipleFields(Connection connection, String tableName, String[] columnNames, String[] searchValues, String[] columnTypes) {
+        ArrayList<String[]> out = new ArrayList<>();
+        if (columnNames.length != searchValues.length || columnNames.length != columnTypes.length) {
+            throw new IllegalArgumentException("The number of column names, search values, and column types must be equal.");
+        }
 
+        StringBuilder sql = new StringBuilder("SELECT * FROM ").append(tableName).append(" WHERE ");
+
+        for (int i = 0; i < columnNames.length; i++) {
+            if (i > 0) {
+                sql.append(" AND ");
+            }
+
+            String columnType = columnTypes[i];
+            String searchValue = searchValues[i];
+            String wildcard = "";
+
+            if ("VARCHAR".equalsIgnoreCase(columnType) || "CHAR".equalsIgnoreCase(columnType)) {
+                wildcard = "%";
+            }
+
+            sql.append(columnNames[i]).append(" LIKE ").append("LOWER(?)");
+
+            if (!wildcard.isEmpty()) {
+                sql.append(wildcard);
+            }
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(sql.toString())) {
+            for (int i = 0; i < searchValues.length; i++) {
+                statement.setString(i + 1, searchValues[i].toLowerCase());
+            }
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    String[] row = new String[columnNames.length];
+                    for (int i = 0; i < columnNames.length; i++) {
+                        row[i] = resultSet.getString(columnNames[i]);
+                    }
+                    out.add(row);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return out;
+    }
 }

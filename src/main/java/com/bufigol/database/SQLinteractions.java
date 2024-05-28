@@ -360,21 +360,38 @@ public class SQLinteractions {
 
     }
 
-    public static ArrayList<String[]> searchByMultipleFieldOR(Connection connection, String table, String[] field, String[] values)  {
+    public static ArrayList<String[]> searchByMultipleFieldOR(Connection connection, String table, String[] field,String[] types, String[] values)  {
         ArrayList<String[]> out = new ArrayList<>();
         StringBuilder sql = new StringBuilder("SELECT * FROM " + table + " WHERE ");
         if (field.length != values.length) {
             throw new IllegalArgumentException("The number of fields and values must be the same.");
         }
         for (int i = 0; i < field.length; i++) {
-            sql.append(field[i]).append(" = ").append(values[i]);
+            sql.append(field[i]).append(" = ?");
             if (i < field.length - 1) {
                 sql.append(" OR ");
             }
         }
-
+        PreparedStatement pstmt= null;
         try {
-            PreparedStatement pstmt= connection.prepareStatement(sql.toString());
+            pstmt = connection.prepareStatement(sql.toString());
+            for(int i=0;i<values.length;i++){
+                switch (types[i]){
+                case "INT":
+                    pstmt.setInt(i+1,Integer.parseInt(values[i]));
+                    break;
+                case "FLOAT":
+                    pstmt.setFloat(i+1,Float.parseFloat(values[i]));
+                    break;
+                case "DOUBLE":
+                    pstmt.setDouble(i+1,Double.parseDouble(values[i]));
+                    break;
+                default:
+                    pstmt.setString(i+1,values[i]);
+                    break;
+                }
+
+            }
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 int columnCount = rs.getMetaData().getColumnCount();

@@ -392,7 +392,7 @@ public class SQLinteractions {
                 }
 
             }
-            ResultSet rs = pstmt.executeQuery();
+                        ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 int columnCount = rs.getMetaData().getColumnCount();
                 String[] row = new String[columnCount];
@@ -412,9 +412,9 @@ public class SQLinteractions {
      *
      * @param connection  the database connection
      * @param nombreTabla the name of the table to create
-     * @param columnas    an array of column names for the new table
+     * @param columnas       an array of column names for the new table
      * @param tipos       an array of column types for the new table, corresponding to the columnas array
-     * @return true if the table was created successfully, false otherwise
+     * @return true if the   1table was created successfully, false otherwise
      * @throws IllegalArgumentException if the number of columnas and tipos arrays are not equal
      */
     public static boolean createTable(Connection connection, String nombreTabla, String[] columnas, String[] tipos)  {

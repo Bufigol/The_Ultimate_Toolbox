@@ -1,3 +1,15 @@
-# Default ignored files
+# IGNORED FILES
+# The following lines define a list of files that will be ignored by default when
+# working with the codebase. This can be useful for excluding files that do not
+# contain relevant code or configuration settings.
+
+# The first file path is '/shelf/', which likely refers to a directory used for
+# storing temporary or intermediate data. This directory may not need to be
+# tracked or versioned, so it is excluded from the codebase.
 /shelf/
+
+# The second file path is '/workspace.xml', which is likely a configuration file
+# specific to the user's development environment. Since this file is not
+# necessary for the code to run or be understood, it is excluded from the
+# codebase.
 /workspace.xml

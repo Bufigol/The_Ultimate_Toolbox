@@ -1,6 +1,5 @@
-package com.bufigol.fileManagment;
+package com.Bufigol.fileManagment;
 
-import com.bufigol.fileManagment.UniversalCSVReaderAndWriter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

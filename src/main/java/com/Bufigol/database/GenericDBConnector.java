@@ -1,4 +1,4 @@
-package com.bufigol.database;
+package com.Bufigol.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

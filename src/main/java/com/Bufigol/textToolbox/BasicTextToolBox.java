@@ -1,4 +1,4 @@
-package com.bufigol.textToolbox;
+package com.Bufigol.textToolbox;
 
 import java.text.Normalizer;
 import java.util.regex.Matcher;

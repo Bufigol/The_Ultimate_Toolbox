@@ -1,4 +1,4 @@
-package com.bufigol.otherToolboxes;
+package com.Bufigol.otherToolboxes;
 
 import java.util.Random;
 

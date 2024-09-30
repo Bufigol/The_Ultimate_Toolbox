@@ -1,4 +1,4 @@
-package com.bufigol.fileManagment;
+package com.Bufigol.fileManagment;
 
 import java.io.*;
 import java.util.ArrayList;

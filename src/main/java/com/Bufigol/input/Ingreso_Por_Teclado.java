@@ -1,4 +1,4 @@
-package com.bufigol.input;
+package com.Bufigol.input;
 
 import java.util.Scanner;
 

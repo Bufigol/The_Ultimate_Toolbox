@@ -1,7 +1,6 @@
-package com.bufigol.configurationFile;
+package com.Bufigol.configurationFile;
 
-import com.bufigol.errorHandler.ConfigException;
-import com.bufigol.fileManagment.ErrorLogger;
+import com.Bufigol.errorHandler.ConfigException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

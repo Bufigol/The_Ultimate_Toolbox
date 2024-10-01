@@ -1,4 +1,4 @@
-package com.Bufigol.otherToolboxes;
+package com.bufigol.otherToolboxes;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

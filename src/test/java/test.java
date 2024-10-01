@@ -1,5 +1,5 @@
-import com.Bufigol.generadores.GeneradorIdentificadoresAleatorios;
-import com.Bufigol.comprobadores.ComprobadoresIdentificadores;
+import com.bufigol.generadores.GeneradorIdentificadoresAleatorios;
+import com.bufigol.comprobadores.ComprobadoresIdentificadores;
 
 public class test {
     public static void main(String[] args) {

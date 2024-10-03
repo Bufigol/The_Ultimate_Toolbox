@@ -1,8 +1,4 @@
-package com.bufigol.errorHandler;
-
-import com.bufigol.fileManagment.ErrorLogger;
-
-import java.io.IOException;
+package com.Bufigol.errorHandler;
 
 /**
  * ConfigException is a custom exception class that extends the Java Exception class.

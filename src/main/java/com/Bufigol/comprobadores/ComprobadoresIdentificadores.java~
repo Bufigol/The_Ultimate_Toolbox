@@ -66,6 +66,4 @@ public class ComprobadoresIdentificadores {
         // Verificar que la letra calculada sea igual a la letra del DNI
         return letraCalculada == letraProporcionada;
     }
-
-
 }

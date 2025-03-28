@@ -40,6 +40,11 @@ public class GeneradoresWeb {
         return doc.title();
     }
 
+    /**
+     * Devuelve la direcci n IP de la m quina en la que se est  ejecutando este c digo.
+     *
+     * @return La direcci n IP de la m quina en la que se est  ejecutando este c digo o "1.1.1.1" si no se pudo obtener.
+     */
     public static String getMyIPAddress() {
         try {
             InetAddress ipAddress = InetAddress.getLocalHost();

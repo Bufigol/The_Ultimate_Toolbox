@@ -1,39 +1,42 @@
-package com.bufigol.generadores;
-
-import com.bufigol.modelage.Articulo;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-
-import java.io.FileOutputStream;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+package com.theultimatetoolbox.generadores;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Paths;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-
+import java.io.StringWriter;
+import java.net.InetAddress;
 import java.net.URL;
-import java.util.List;
+import java.net.UnknownHostException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.commons.net.whois.WhoisClient;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.StringWriter;
+
+import org.apache.commons.net.whois.WhoisClient;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.w3c.dom.Element;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.theultimatetoolbox.modelage.Articulo;
 
 
 public class GeneradoresWeb {
+
+    private static final Logger logger = LogManager.getLogger(GeneradoresWeb.class);
 
     public static String obtenerTituloWebsite(String url) throws IOException {
         Document doc = Jsoup.connect(url).get();
@@ -103,17 +106,18 @@ public class GeneradoresWeb {
     }
 
     public static String generarHTMLBasico(String titulo, String contenido) {
-        return "<!DOCTYPE html>\n" +
-                "<html lang=\"es\">\n" +
-                "<head>\n" +
-                "    <meta charset=\"UTF-8\">\n" +
-                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
-                "    <title>" + titulo + "</title>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "    " + contenido + "\n" +
-                "</body>\n" +
-                "</html>";
+        return """
+                <!DOCTYPE html>
+                <html lang="es">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>%s</title>
+                </head>
+                <body>
+                    %s
+                </body>
+                </html>""".formatted(titulo, contenido);
     }
 
     public static String obtenerFaviconURL(String url) throws IOException {
@@ -121,12 +125,17 @@ public class GeneradoresWeb {
         Elements links = doc.select("link[rel~=icon]");
 
         if (!links.isEmpty()) {
-            String faviconUrl = links.first().attr("href");
-            if (faviconUrl.startsWith("http")) {
-                return faviconUrl;
-            } else {
-                URL baseUrl = new URL(url);
-                return new URL(baseUrl, faviconUrl).toString();
+            var firstLink = links.first();
+            if (firstLink != null) {
+                String faviconUrl = firstLink.attr("href");
+                if (faviconUrl != null) {
+                    if (faviconUrl.startsWith("http")) {
+                        return faviconUrl;
+                    } else {
+                        URL baseUrl = new URL(url);
+                        return new URL(baseUrl, faviconUrl).toString();
+                    }
+                }
             }
         }
         return url + "/favicon.ico"; // URL por defecto si no se encuentra
@@ -237,7 +246,7 @@ public class GeneradoresWeb {
             }
 
         } catch (WriterException | IOException e) {
-            e.printStackTrace();
+            logger.error("Error al generar el código QR: {}", e.getMessage());
         }
     }
 }

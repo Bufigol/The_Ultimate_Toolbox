@@ -46,3 +46,18 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+
+
+### Temporary Files ###
+*.tmp
+*.temp
+*~
+*.bak
+*.swp
+*~
+
+
+### Backup Files ###
+*.bak
+*.backup
+*~

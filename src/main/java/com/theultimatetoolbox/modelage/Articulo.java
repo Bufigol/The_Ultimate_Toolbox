@@ -1,4 +1,4 @@
-package com.bufigol.modelage;
+package com.theultimatetoolbox.modelage;
 
 public class Articulo {
     private String titulo;

@@ -1,0 +1,18 @@
+<database-templates>
+    <template name="mysql">
+        <url>jdbc:mysql://localhost:3306/mydatabase</url>
+        <driver>com.mysql.cj.jdbc.Driver</driver>
+        <properties>
+            <property name="useSSL" value="false" />
+            <property name="serverTimezone" value="UTC" />
+        </properties>
+    </template>
+    <template name="postgresql">
+        <url>jdbc:postgresql://localhost:5432/mydatabase</url>
+        <driver>org.postgresql.Driver</driver>
+    </template>
+    <template name="h2">
+        <url>jdbc:h2:mem:testdb</url>
+        <driver>org.h2.Driver</driver>
+    </template>
+</database-templates>

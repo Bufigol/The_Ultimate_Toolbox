@@ -1,4 +1,4 @@
-package com.theultimatetoolbox.services.database;
+package com.ultimatetoolbox.database.jdbc;
 
 
 import java.sql.*;
@@ -56,6 +56,8 @@ public class SQLinteractions {
             // Retorna true si al menos una fila fue insertada, de lo contrario retorna false
             return filasInsertadas > 0;
         } catch (SQLException e) {
+            Logger logger = LogManager.getLogger(SQLinteractions.class);
+            logger.error("An error occurred while searching", e);
             throw new RuntimeException(e);
         }
     }

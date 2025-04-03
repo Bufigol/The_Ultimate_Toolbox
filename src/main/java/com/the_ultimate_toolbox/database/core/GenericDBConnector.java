@@ -29,6 +29,7 @@ public class GenericDBConnector {
                 this.username = usr;
                 if (!(pwd.isBlank() || pwd.isEmpty())){
                     this.password = pwd;
+                    
                     conection=true;
                 }
             }

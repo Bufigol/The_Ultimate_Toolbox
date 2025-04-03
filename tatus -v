@@ -1,0 +1,31 @@
+[1mdiff --git a/src/main/java/com/the_ultimate_toolbox/database/core/GenericDBConnector.java b/src/main/java/com/the_ultimate_toolbox/database/core/GenericDBConnector.java[m
+[1mindex 0358a42..2d699cf 100644[m
+[1m--- a/src/main/java/com/the_ultimate_toolbox/database/core/GenericDBConnector.java[m
+[1m+++ b/src/main/java/com/the_ultimate_toolbox/database/core/GenericDBConnector.java[m
+[36m@@ -29,6 +29,7 @@[m [mpublic class GenericDBConnector {[m
+                 this.username = usr;[m
+                 if (!(pwd.isBlank() || pwd.isEmpty())){[m
+                     this.password = pwd;[m
+[32m+[m[41m                    [m
+                     conection=true;[m
+                 }[m
+             }[m
+[1mdiff --git a/src/main/java/com/the_ultimate_toolbox/database/jdbc/SQLinteractions.java b/src/main/java/com/the_ultimate_toolbox/database/jdbc/SQLinteractions.java[m
+[1mindex 28b0bed..ec03156 100644[m
+[1m--- a/src/main/java/com/the_ultimate_toolbox/database/jdbc/SQLinteractions.java[m
+[1m+++ b/src/main/java/com/the_ultimate_toolbox/database/jdbc/SQLinteractions.java[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-package com.theultimatetoolbox.services.database;[m
+[32m+[m[32mpackage com.ultimatetoolbox.database.jdbc;[m
+ [m
+ [m
+ import java.sql.*;[m
+[36m@@ -56,6 +56,8 @@[m [mpublic class SQLinteractions {[m
+             // Retorna true si al menos una fila fue insertada, de lo contrario retorna false[m
+             return filasInsertadas > 0;[m
+         } catch (SQLException e) {[m
+[32m+[m[32m            Logger logger = LogManager.getLogger(SQLinteractions.class);[m
+[32m+[m[32m            logger.error("An error occurred while searching", e);[m
+             throw new RuntimeException(e);[m
+         }[m
+     }[m

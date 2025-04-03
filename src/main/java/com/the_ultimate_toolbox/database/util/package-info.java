@@ -7,4 +7,4 @@
  * @version 1.0
  * @since 1.0
  */
-package com.ultimatetoolbox.database.util;
+package com.the_ultimate_toolbox.database.util;

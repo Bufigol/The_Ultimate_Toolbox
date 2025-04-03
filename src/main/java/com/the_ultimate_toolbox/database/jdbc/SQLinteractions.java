@@ -1,4 +1,4 @@
-package com.ultimatetoolbox.database.jdbc;
+package com.the_ultimate_toolbox.database.jdbc;
 
 
 import java.sql.*;

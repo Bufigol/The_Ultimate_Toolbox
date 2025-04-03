@@ -1,4 +1,4 @@
-package com.ultimatetoolbox.database.core;
+package com.the_ultimate_toolbox.database.core;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

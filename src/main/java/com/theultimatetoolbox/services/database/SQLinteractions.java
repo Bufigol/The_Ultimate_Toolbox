@@ -1,4 +1,4 @@
-package com.bufigol.database;
+package com.theultimatetoolbox.services.database;
 
 
 import java.sql.*;

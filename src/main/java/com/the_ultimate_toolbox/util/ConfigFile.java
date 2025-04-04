@@ -1,6 +1,6 @@
-package com.bufigol.configurationFile;
+package com.the_ultimate_toolbox.util;
 
-import com.bufigol.errorHandler.ConfigException;
+import com.the_ultimate_toolbox.error.types.ConfigException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

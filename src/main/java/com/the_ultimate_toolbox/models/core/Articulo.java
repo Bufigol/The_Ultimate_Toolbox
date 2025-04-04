@@ -30,6 +30,10 @@ public class Articulo extends AbstractModel {
      */
     public Articulo(String titulo, String enlace, String descripcion) {
         super();
+        initialize(titulo, enlace, descripcion);
+    }
+
+    private void initialize(String titulo, String enlace, String descripcion) {
         setTitulo(titulo);
         setEnlace(enlace);
         setDescripcion(descripcion);

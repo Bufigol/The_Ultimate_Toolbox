@@ -1,4 +1,4 @@
-package com.theultimatetoolbox.modelage;
+package com.the_ultimate_toolbox.models.core;
 
 public class Articulo {
     private String titulo;

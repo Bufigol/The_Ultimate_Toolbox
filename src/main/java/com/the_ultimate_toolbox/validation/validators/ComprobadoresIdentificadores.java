@@ -1,4 +1,4 @@
-package com.bufigol.comprobadores;
+package com.the_ultimate_toolbox.validation.validators;
 
 public class ComprobadoresIdentificadores {
     private static final int[] FACTORES = {2, 3, 4, 5, 6, 7};

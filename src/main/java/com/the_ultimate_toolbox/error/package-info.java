@@ -7,4 +7,4 @@
  * @version 1.0
  * @since 1.0
  */
-package com.ultimatetoolbox.error;
+package com.the_ultimate_toolbox.error;

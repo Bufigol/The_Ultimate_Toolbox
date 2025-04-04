@@ -32,6 +32,7 @@ com.ultimatetoolbox.models/
 - **JsonParser:** Utilidad para análisis y generación de JSON.
 
 **Ejemplo de uso:**
+
 ```java
 JsonObject user = new JsonObject();
 user.addProperty("name", "Juan");
@@ -55,6 +56,7 @@ JsonObject parsed = JsonParser.parse(json); // Analiza desde String
 - **UserProfile:** Perfil extendido con información adicional.
 
 **Ejemplo de uso:**
+
 ```java
 User user = new User.Builder()
         .withId(UUID.randomUUID())
@@ -73,6 +75,7 @@ User user = new User.Builder()
 - **EmailTemplate:** Plantillas para mensajes de correo.
 
 **Ejemplo de uso:**
+
 ```java
 EmailMessage message = new EmailMessage.Builder()
         .from(new EmailAddress("sender@example.com"))
@@ -91,6 +94,7 @@ EmailMessage message = new EmailMessage.Builder()
 - **HttpParameter:** Parámetros para solicitudes.
 
 **Ejemplo de uso:**
+
 ```java
 HttpRequest request = new HttpRequest.Builder()
         .url("https://api.example.com/users")
@@ -107,6 +111,7 @@ HttpRequest request = new HttpRequest.Builder()
 - **ExchangeRate:** Tasa de cambio entre monedas.
 
 **Ejemplo de uso:**
+
 ```java
 Currency usd = Currency.USD;
 Currency eur = Currency.EUR;

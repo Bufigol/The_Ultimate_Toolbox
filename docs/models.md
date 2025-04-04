@@ -10,7 +10,7 @@ El módulo de modelos de The_Ultimate_Toolbox proporciona estructuras de datos p
 
 Los modelos siguen un enfoque basado en interfaces con implementaciones concretas, permitiendo personalización y extensibilidad. La estructura de paquetes será:
 
-```
+```tree
 com.ultimatetoolbox.models/
 ├── core/             # Interfaces y clases base
 ├── common/           # Implementaciones estándar

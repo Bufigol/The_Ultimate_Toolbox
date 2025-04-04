@@ -3,12 +3,15 @@
 ## The_Ultimate_Toolbox
 
 ### Descripción General
+
 The_Ultimate_Toolbox es una dependencia Java integral diseñada para proporcionar un conjunto completo de herramientas y utilidades que faciliten el desarrollo de aplicaciones Java. Esta biblioteca busca simplificar tareas comunes, reducir el código repetitivo y proporcionar soluciones estandarizadas para problemas frecuentes en el desarrollo Java.
 
 ### Visión
+
 Convertirse en la dependencia esencial para todos los desarrolladores Java, ofreciendo un conjunto de herramientas potentes, flexibles y fáciles de usar que cubran la mayoría de las necesidades de desarrollo comunes, permitiendo a los programadores centrarse en la lógica de negocio en lugar de reinventar soluciones para problemas comunes.
 
 ### Público Objetivo
+
 - **Desarrolladores Java principiantes:** Que necesitan soluciones prefabricadas y fáciles de implementar.
 - **Desarrolladores Java intermedios:** Que buscan agilizar su desarrollo y reducir el código repetitivo.
 - **Desarrolladores Java avanzados:** Que requieren herramientas confiables y personalizables para sus proyectos complejos.

@@ -4,7 +4,7 @@ Este documento detalla la estructura de carpetas completa del proyecto The_Ultim
 
 ## Estructura Principal
 
-```
+```tree
 the-ultimate-toolbox/
 ├── src/
 │   ├── main/
@@ -90,8 +90,10 @@ the-ultimate-toolbox/
 ### 1. `src/main/java/com/ultimatetoolbox/`
 
 #### `models/`
+
 Contiene todas las clases de modelos predefinidos organizadas por tipo:
-```
+
+``` tree
 models/
 ├── core/
 │   ├── Model.java
@@ -107,8 +109,10 @@ models/
 ```
 
 #### `validation/`
+
 Contiene anotaciones de validación, validadores y utilidades relacionadas:
-```
+
+```tree
 validation/
 ├── annotations/
 │   ├── ValidEmail.java
@@ -127,8 +131,10 @@ validation/
 ```
 
 #### `database/`
+
 Contiene clases para la conexión y operación con bases de datos:
-```
+
+```tree
 database/
 ├── core/
 │   ├── Database.java
@@ -151,8 +157,10 @@ database/
 ```
 
 #### `error/`
+
 Sistema de gestión de errores:
-```
+
+```tree
 error/
 ├── core/
 │   ├── ToolboxException.java
@@ -173,8 +181,10 @@ error/
 ```
 
 #### `logging/`
+
 Sistema de logging:
-```
+
+```tree
 logging/
 ├── core/
 │   ├── Logger.java
@@ -192,8 +202,10 @@ logging/
 ```
 
 #### `files/`
+
 Utilidades para manipulación de archivos:
-```
+
+```tree
 files/
 ├── core/
 │   ├── FileHandler.java
@@ -214,8 +226,10 @@ files/
 ```
 
 #### `math/`
+
 Utilidades matemáticas:
-```
+
+```tree
 math/
 ├── core/
 │   ├── MathUtils.java
@@ -235,8 +249,10 @@ math/
 ```
 
 #### `input/`
+
 Utilidades para entrada por teclado:
-```
+
+```tree
 input/
 ├── core/
 │   ├── InputHandler.java
@@ -254,8 +270,10 @@ input/
 ```
 
 #### `api/`
+
 Cliente para APIs públicas:
-```
+
+```tree
 api/
 ├── core/
 │   ├── ApiClient.java
@@ -276,8 +294,10 @@ api/
 ```
 
 #### `util/`
+
 Utilidades generales:
-```
+
+```tree
 util/
 ├── string/
 │   ├── StringUtils.java
@@ -334,7 +354,7 @@ Configuraciones para GitHub, incluyendo plantillas para issues y flujos de traba
 
 El proyecto está diseñado con un enfoque modular que permitirá en el futuro separarlo en múltiples artefactos si es necesario:
 
-```
+```doc
 ultimate-toolbox-core/
 ultimate-toolbox-models/
 ultimate-toolbox-validation/

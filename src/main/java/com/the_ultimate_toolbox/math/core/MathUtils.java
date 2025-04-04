@@ -1,4 +1,4 @@
-package com.ultimatetoolbox.math.core;
+package com.the_ultimate_toolbox.math.core;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

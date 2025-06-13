@@ -105,11 +105,11 @@ public class StatUtilsTest {
     @Test
     @DisplayName("binomialCoefficient números grandes")
     void testBinomialCoefficientNumerosGrandes() {
-        assertEquals(1287, StatUtils.binomialCoefficient(13, 3));
-        assertEquals(3003, StatUtils.binomialCoefficient(15, 5));
-        assertEquals(8008, StatUtils.binomialCoefficient(16, 6));
-        assertEquals(48620, StatUtils.binomialCoefficient(20, 8));
-        assertEquals(177100, StatUtils.binomialCoefficient(25, 10));
+        assertEquals(286, StatUtils.binomialCoefficient(13, 3));      // C(13,3) = 286
+        assertEquals(3003, StatUtils.binomialCoefficient(15, 5));     // C(15,5) = 3003
+        assertEquals(8008, StatUtils.binomialCoefficient(16, 6));     // C(16,6) = 8008
+        assertEquals(125970, StatUtils.binomialCoefficient(20, 8));   // C(20,8) = 125970
+        assertEquals(3268760, StatUtils.binomialCoefficient(25, 10)); // C(25,10) = 3268760
     }
 
     // ---------- Tests de Excepciones para binomialCoefficient ----------

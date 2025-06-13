@@ -36,8 +36,17 @@ public class MathUtils {
      * @param number The number for which to find the nearest multiple of ten
      * @return The multiple of ten nearest to the input number
      */
-    public static int nextMultipleOfTen(int number) {
-        return (int) (Math.round((number + 5) / 10.0) * 10.0);
+    public static int nextMultipleOfTen(Integer number) {
+        if (number.equals(0)) {
+            return 0;
+        } else {
+            if (number > 0) {
+                return (int) (Math.floor((number + 5) / 10.0) * 10);
+            } else {
+                // Para números negativos: restar 5 y dividir por 10, truncar hacia arriba
+                return (int) (Math.ceil((number - 5) / 10.0) * 10);
+            }
+        }
     }
 
     /**
@@ -56,7 +65,17 @@ public class MathUtils {
      * @return The multiple of hundred nearest to the input number
      */
     public static int nextMultipleOfHundred(int number) {
-        return (int) (Math.round((number + 50) / 100.0) * 100.0);
+        if (number == 0) {
+            return 0;
+        }
+
+        if (number > 0) {
+            // Para números positivos: agregar 50 y dividir por 100, truncar hacia abajo
+            return (int) (Math.floor((number + 50) / 100.0) * 100);
+        } else {
+            // Para números negativos: restar 50 y dividir por 100, truncar hacia arriba
+            return (int) (Math.ceil((number - 50) / 100.0) * 100);
+        }
     }
 
     /**
@@ -150,13 +169,8 @@ public class MathUtils {
      */
     public static int roundToLastPowerOfTen(int n) {
         int length = String.valueOf(Math.abs(n)).length();
-        String stTen = "1";
 
-        for (int i = 0; i < length-1; i++) {
-            stTen += "0";
-        }
-
-        return Integer.parseInt(stTen);
+        return Integer.parseInt("1" + "0".repeat(length - 1));
     }
 
     /**

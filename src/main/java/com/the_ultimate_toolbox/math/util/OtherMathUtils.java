@@ -1,12 +1,8 @@
-package com.bufigol.otherToolboxes;
+package com.the_ultimate_toolbox.math.util;
 
 import java.util.Random;
 
-/**
- * This class, MiscToolbox, contains a collection of miscellaneous utility methods.
- */
-public class MiscToolbox {
-
+public class OtherMathUtils {
     /**
      * Generates and returns a random integer within the specified range (inclusive).
      * The random number generation is seeded with the current system time to ensure
@@ -37,5 +33,4 @@ public class MiscToolbox {
             return fibonacci(n - 1) + fibonacci(n - 2);
         }
     }
-
 }

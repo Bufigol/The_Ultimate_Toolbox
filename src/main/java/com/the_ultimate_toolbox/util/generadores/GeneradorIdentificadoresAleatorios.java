@@ -1,4 +1,4 @@
-package com.the_ultimate_toolbox.util;
+package com.the_ultimate_toolbox.util.generadores;
 
 import java.util.Random;
 

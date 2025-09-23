@@ -1,4 +1,4 @@
-import com.the_ultimate_toolbox.util.GeneradoresWeb;
+import com.the_ultimate_toolbox.util.generadores.GeneradoresWeb;
 
 public class TestGeneradorQR {
     public static void main(String[] args) {

@@ -3,7 +3,6 @@ package com.the_ultimate_toolbox.util.json;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.io.*;
@@ -18,7 +17,6 @@ import java.util.stream.StreamSupport;
 /**
  * Representación optimizada de un objeto JSON con soporte para manipulación fluida.
  * Thread-safe y optimizada para rendimiento con Jackson.
- *
  * Características principales:
  * - API fluida para construcción y manipulación
  * - Thread-safe mediante copy-on-write para operaciones de escritura
@@ -31,6 +29,7 @@ import java.util.stream.StreamSupport;
  */
 public class JSONObject implements Serializable, Cloneable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     // Nodo raíz de Jackson
@@ -146,35 +145,23 @@ public class JSONObject implements Serializable, Cloneable {
         // Copy-on-write para thread-safety
         synchronized (this) {
             invalidateCache();
-            if (value == null) {
-                rootNode.putNull(key);
-            } else if (value instanceof String) {
-                rootNode.put(key, (String) value);
-            } else if (value instanceof Integer) {
-                rootNode.put(key, (Integer) value);
-            } else if (value instanceof Long) {
-                rootNode.put(key, (Long) value);
-            } else if (value instanceof Double) {
-                rootNode.put(key, (Double) value);
-            } else if (value instanceof Float) {
-                rootNode.put(key, (Float) value);
-            } else if (value instanceof Boolean) {
-                rootNode.put(key, (Boolean) value);
-            } else if (value instanceof BigInteger) {
-                rootNode.put(key, (BigInteger) value);
-            } else if (value instanceof BigDecimal) {
-                rootNode.put(key, (BigDecimal) value);
-            } else if (value instanceof JSONObject) {
-                rootNode.set(key, ((JSONObject) value).rootNode);
-            } else if (value instanceof JsonNode) {
-                rootNode.set(key, (JsonNode) value);
-            } else if (value instanceof Map) {
-                rootNode.set(key, engine.getStandardMapper().valueToTree(value));
-            } else if (value instanceof Collection) {
-                rootNode.set(key, engine.getStandardMapper().valueToTree(value));
-            } else {
-                // Intentar convertir objetos complejos
-                rootNode.set(key, engine.getStandardMapper().valueToTree(value));
+            switch (value) {
+                case null -> rootNode.putNull(key);
+                case String s -> rootNode.put(key, s);
+                case Integer i -> rootNode.put(key, i);
+                case Long l -> rootNode.put(key, l);
+                case Double v -> rootNode.put(key, v);
+                case Float v -> rootNode.put(key, v);
+                case Boolean b -> rootNode.put(key, b);
+                case BigInteger bigInteger -> rootNode.put(key, bigInteger);
+                case BigDecimal bigDecimal -> rootNode.put(key, bigDecimal);
+                case JSONObject jsonObject -> rootNode.set(key, jsonObject.rootNode);
+                case JsonNode jsonNode -> rootNode.set(key, jsonNode);
+                case Map map -> rootNode.set(key, engine.getStandardMapper().valueToTree(value));
+                case Collection collection -> rootNode.set(key, engine.getStandardMapper().valueToTree(value));
+                default ->
+                    // Intentar convertir objetos complejos
+                        rootNode.set(key, engine.getStandardMapper().valueToTree(value));
             }
         }
         return this;

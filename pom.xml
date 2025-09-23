@@ -40,6 +40,10 @@
 
     <repositories>
         <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+        <repository>
             <id>github</id>
             <url>https://maven.pkg.github.com/Bufigol/The_Ultimate_Toolbox</url>
             <snapshots>
@@ -84,12 +88,43 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
+        <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
-            <version>9.0.0</version>
+            <version>9.4.0</version>
         </dependency>
 
+        <!-- Jackson Core para máximo rendimiento -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+
+        <!-- Jackson Databind para mapeo de objetos -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+
+        <!-- Jackson Annotations para configuración -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+
+        <!-- JSON5 support - Comentado temporalmente por problema de repositorio
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-json5</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+        -->
+
+        <!-- Mantener org.json para compatibilidad si es necesario -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>

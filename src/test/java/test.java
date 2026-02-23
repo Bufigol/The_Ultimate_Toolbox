@@ -1,4 +1,4 @@
-import com.the_ultimate_toolbox.util.GeneradorIdentificadoresAleatorios;
+import com.the_ultimate_toolbox.util.generadores.GeneradorIdentificadoresAleatorios;
 import com.the_ultimate_toolbox.api.ComprobadoresIdentificadores;
 
 public class test {

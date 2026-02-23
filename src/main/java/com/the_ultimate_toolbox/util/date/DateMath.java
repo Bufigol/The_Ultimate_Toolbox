@@ -32,10 +32,8 @@ public class DateMath {
      * @param fechaFin La fecha final del cálculo
      * @return El número de días entre las dos fechas
      * @throws NullPointerException si alguna de las fechas es null
-     *
-     * @example
-     *
-     *
+     * <p>
+     * Ejemplo de uso:
      * <pre>
      * LocalDate inicio = LocalDate.of(2025, 1, 1);
      * LocalDate fin = LocalDate.of(2025, 1, 10);
@@ -61,8 +59,8 @@ public class DateMath {
      * @param fechaFin La fecha final del cálculo (Date legacy)
      * @return El número de días entre las dos fechas
      * @throws NullPointerException si alguna de las fechas es null
-     *
-     * @example
+     * <p>
+     * Ejemplo de uso:
      * <pre>
      * Date inicio = new Date(125, 0, 1); // 1 de enero de 2025
      * Date fin = new Date(125, 0, 10);   // 10 de enero de 2025
@@ -91,8 +89,8 @@ public class DateMath {
      * @param diasASumar El número de días a sumar (puede ser negativo para restar)
      * @return Una nueva fecha con los días sumados
      * @throws NullPointerException si la fecha es null
-     *
-     * @example
+     * <p>
+     * Ejemplo de uso:
      * <pre>
      * LocalDate fecha = LocalDate.of(2025, 1, 15);
      * LocalDate nuevaFecha = DateMath.sumarDias(fecha, 10); // 2025-01-25
@@ -114,8 +112,8 @@ public class DateMath {
      * @param diasASumar El número de días a sumar (puede ser negativo para restar)
      * @return Una nueva fecha Date con los días sumados
      * @throws NullPointerException si la fecha es null
-     *
-     * @example
+     * <p>
+     * Ejemplo de uso:
      * <pre>
      * Date fecha = new Date(125, 0, 15); // 15 de enero de 2025
      * Date nuevaFecha = DateMath.sumarDias(fecha, 10); // 25 de enero de 2025
@@ -141,8 +139,8 @@ public class DateMath {
      * @param diasARestar El número de días a restar (puede ser negativo para sumar)
      * @return Una nueva fecha con los días restados
      * @throws NullPointerException si la fecha es null
-     *
-     * @example
+     * <p>
+     * Ejemplo de uso:
      * <pre>
      * LocalDate fecha = LocalDate.of(2025, 1, 20);
      * LocalDate nuevaFecha = DateMath.restarDias(fecha, 5); // 2025-01-15
@@ -164,8 +162,8 @@ public class DateMath {
      * @param diasARestar El número de días a restar (puede ser negativo para sumar)
      * @return Una nueva fecha Date con los días restados
      * @throws NullPointerException si la fecha es null
-     *
-     * @example
+     * <p>
+     * Ejemplo de uso:
      * <pre>
      * Date fecha = new Date(125, 0, 20); // 20 de enero de 2025
      * Date nuevaFecha = DateMath.restarDias(fecha, 5); // 15 de enero de 2025
@@ -193,8 +191,8 @@ public class DateMath {
      *
      * @param año El año a verificar
      * @return true si el año es bisiesto, false en caso contrario
-     *
-     * @example
+     * <p>
+     * Ejemplo de uso:
      * <pre>
      * boolean esBisiesto2024 = DateMath.esAñoBisiesto(2024); // true
      * boolean esBisiesto2025 = DateMath.esAñoBisiesto(2025); // false
@@ -215,8 +213,8 @@ public class DateMath {
      * @param fecha La fecha de la cual extraer el año para verificar
      * @return true si el año de la fecha es bisiesto, false en caso contrario
      * @throws NullPointerException si la fecha es null
-     *
-     * @example
+     * <p>
+     * Ejemplo de uso:
      * <pre>
      * Date fecha2024 = new Date(124, 5, 15); // 15 de junio de 2024
      * Date fecha2025 = new Date(125, 5, 15); // 15 de junio de 2025
@@ -244,8 +242,8 @@ public class DateMath {
      * @param zonaDestino La zona horaria de destino
      * @return La fecha y hora convertida a la zona horaria de destino
      * @throws NullPointerException si algún parámetro es null
-     *
-     * @example
+     * <p>
+     * Ejemplo de uso:
      * <pre>
      * LocalDateTime fechaHora = LocalDateTime.of(2025, 1, 15, 10, 30);
      * ZoneId zonaOrigen = ZoneId.of("America/New_York");
@@ -277,8 +275,8 @@ public class DateMath {
      * @param zonaDestino La zona horaria de destino
      * @return Una nueva fecha Date en la zona horaria de destino
      * @throws NullPointerException si algún parámetro es null
-     *
-     * @example
+     * <p>
+     * Ejemplo de uso:
      * <pre>
      * Date fechaHora = new Date(125, 0, 15, 10, 30, 0); // 15 enero 2025, 10:30 AM
      * ZoneId zonaOrigen = ZoneId.of("America/New_York");
@@ -318,8 +316,8 @@ public class DateMath {
      *         - Cero si fecha1 es igual a fecha2
      *         - Positivo si fecha1 es posterior a fecha2
      * @throws NullPointerException si alguna fecha es null
-     *
-     * @example
+     * <p>
+     * Ejemplo de uso:
      * <pre>
      * // Comparación simple (misma zona horaria)
      * LocalDateTime fecha1 = LocalDateTime.of(2025, 1, 15, 10, 0);
@@ -363,8 +361,8 @@ public class DateMath {
      *         - Cero si fecha1 es igual a fecha2
      *         - Positivo si fecha1 es posterior a fecha2
      * @throws NullPointerException si alguna fecha es null
-     *
-     * @example
+     * <p>
+     * Ejemplo de uso:
      * <pre>
      * Date fecha1 = new Date(125, 0, 15, 10, 0, 0); // 15 enero 2025, 10:00 AM
      * Date fecha2 = new Date(125, 0, 15, 14, 0, 0); // 15 enero 2025, 2:00 PM
@@ -403,8 +401,8 @@ public class DateMath {
      *         - Cero si fecha1 es igual a fecha2
      *         - Positivo si fecha1 es posterior a fecha2
      * @throws NullPointerException si algún parámetro es null
-     *
-     * @example
+     * <p>
+     * Ejemplo de uso:
      * <pre>
      * LocalDateTime fechaNY = LocalDateTime.of(2025, 1, 15, 10, 0);
      * LocalDateTime fechaMadrid = LocalDateTime.of(2025, 1, 15, 16, 0);
@@ -443,8 +441,8 @@ public class DateMath {
      *         - Cero si fecha1 es igual a fecha2
      *         - Positivo si fecha1 es posterior a fecha2
      * @throws NullPointerException si algún parámetro es null
-     *
-     * @example
+     * <p>
+     * Ejemplo de uso:
      * <pre>
      * Date fechaNY = new Date(125, 0, 15, 10, 0, 0); // 15 enero 2025, 10:00 AM
      * Date fechaMadrid = new Date(125, 0, 15, 16, 0, 0); // 15 enero 2025, 4:00 PM

@@ -95,6 +95,7 @@
  *
  * <h2>Rendimiento:</h2>
  * <table>
+ *   <caption>Benchmarks de rendimiento del módulo JSON</caption>
  *   <tr><th>Operación</th><th>Tamaño</th><th>Tiempo</th><th>Memoria</th></tr>
  *   <tr><td>Parse JSON</td><td>1 MB</td><td>~8ms</td><td>1.8x input</td></tr>
  *   <tr><td>Parse JSON</td><td>100 MB</td><td>~800ms</td><td>1.8x input</td></tr>

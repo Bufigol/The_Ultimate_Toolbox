@@ -6,7 +6,7 @@
 
     <groupId>com.theultimatetoolbox</groupId>
     <artifactId>the-ultimate-toolbox</artifactId>
-    <version>2.1.1</version>
+    <version>0.1.0</version>
 
     <name>The Ultimate Toolbox</name>
     <description>A collection of ultimate tools for Java development</description>
